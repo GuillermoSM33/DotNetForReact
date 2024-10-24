@@ -34,5 +34,10 @@
     <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <Folder Include="EventHandlers\NewFolder1\" />
+  </ItemGroup>
+  
+ 
 </Project>

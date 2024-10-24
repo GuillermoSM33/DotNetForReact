@@ -1,31 +1,34 @@
 ﻿using ApplicationCore.Interfaces;
 using ApplicationCore.Wrappers;
-using AutoMapper;
+using Domain.Entities;
 using Infraestructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infraestructure.Services
 {
     public class EstudiantesService : IEstudiantesService
     {
-        private readonly ApplicationDbContext _dbContext;
-        private readonly IMapper _mapper;
+        private readonly ApplicationDbContext _context;
 
-        public EstudiantesService(ApplicationDbContext dbContext, IMapper mapper)
+        public EstudiantesService(ApplicationDbContext context)
         {
-            _dbContext = dbContext;
-            _mapper = mapper;
+            _context = context;
         }
 
         public async Task<Response<object>> GetEstudiantes()
         {
-            var list = await _dbContext.Estudiantes.ToListAsync();
-            return new Response<object>(list);
+            var estudiantes = await _context.Estudiantes.ToListAsync();
+            return new Response<object>(estudiantes);
+        }
+
+        public async Task<Response<Estudiantes>> GetEstudianteById(int id)
+        {
+            var estudiante = await _context.Estudiantes.FindAsync(id);
+            if (estudiante == null)
+            {
+                return new Response<Estudiantes>("Estudiante no encontrado");
+            }
+            return new Response<Estudiantes>(estudiante);
         }
     }
 }

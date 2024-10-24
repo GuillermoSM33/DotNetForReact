@@ -31,6 +31,17 @@ namespace Host.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEstudianteById(int id)
+        {
+            var result = await _service.GetEstudianteById(id);
+            if (result == null)
+            {
+                return NotFound(new Response<string>("Estudiante no encontrado"));
+            }
+            return Ok(result);
+        }
+
         [HttpPost("create")]
         public async Task<ActionResult<Response<int>>> CreateEstudiante(EstudianteCreateCommand command)
         {
@@ -42,6 +53,18 @@ namespace Host.Controllers
         public async Task<ActionResult<Response<int>>> DeleteEstudiante(int id)
         {
             var command = new EstudianteDeleteCommand { Id = id };
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPut("update/{id}")]
+        public async Task<ActionResult<Response<int>>> UpdateEstudiante(int id, EstudianteUpdateCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest("El ID del comando no coincide con el ID de la URL.");
+            }
+
             var result = await _mediator.Send(command);
             return Ok(result);
         }

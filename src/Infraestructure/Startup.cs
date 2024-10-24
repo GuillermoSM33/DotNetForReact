@@ -1,13 +1,16 @@
 ﻿using Infraestructure.Auth;
 using Infraestructure.Cors;
 using Infraestructure.EventHandlers;
+using Infraestructure.EventHandlers.Estudiantes;
 using Infraestructure.Persistence;
+using Infraestructure.Repositories;
 using Infraestructure.Settings;
 using Infraestructure.Tenant;
 using Infrastructure.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ApplicationCore.Interfaces; 
 
 namespace Infraestructure
 {
@@ -26,6 +29,9 @@ namespace Infraestructure
                     .AddJwt(configuration)
                     .AddEventHandlers()
                     .AddCorsPolicy();
+
+            services.AddTransient<ApplicationCore.Interfaces.IEstudianteRepository, EstudianteRepository>();
+
             return services;
         }
 
