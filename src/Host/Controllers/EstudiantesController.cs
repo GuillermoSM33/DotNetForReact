@@ -69,5 +69,15 @@ namespace Host.Controllers
             return Ok(result);
         }
 
+        [HttpGet("pdf")]
+
+        public abstract async Task<ActionResult> GetPDF()
+        {
+            var pdfile = await _service.GetPDF();
+            return File(pdfile, "application/pdf", "Solicitud-Compra.pdf");
+        }
+
+
+
     }
 }
