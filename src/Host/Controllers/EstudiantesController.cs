@@ -71,10 +71,10 @@ namespace Host.Controllers
 
         [HttpGet("pdf")]
 
-        public abstract async Task<ActionResult> GetPDF()
+        public async Task<ActionResult> GetPDF()
         {
             var pdfile = await _service.GetPDF();
-            return File(pdfile, "application/pdf", "Solicitud-Compra.pdf");
+            return File(pdfile, "application/pdf", "Listado-de-estudiantes.pdf");
         }
 
 
