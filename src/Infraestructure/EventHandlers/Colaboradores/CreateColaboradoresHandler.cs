@@ -25,13 +25,12 @@ namespace ApplicationCore.Handlers
 
             try
             {
-                // Crear entidad Colaborador
                 var colaborador = new Colaboradores
                 {
                     Nombre = request.Nombre,
                     Edad = request.Edad,
                     Birthdate = request.Birthdate,
-                    IsProfessor = request.IsProfessor, // Asignación directa de int
+                    IsProfessor = request.IsProfessor, 
                     FechaCreacion = request.FechaCreacion
                 };
 
@@ -40,7 +39,6 @@ namespace ApplicationCore.Handlers
 
                 Console.WriteLine($"Colaborador creado con ID: {colaborador.Id}");
 
-                // Crear registro en Profesor o Administrativo según el valor de IsProfessor
                 if (request.IsProfessor == 1)
                 {
                     Console.WriteLine("Insertando en Profesor");
@@ -67,7 +65,6 @@ namespace ApplicationCore.Handlers
                     _context.Administrativo.Add(administrativo);
                 }
 
-                // Guardar cambios en la base de datos para Profesor o Administrativo
                 await _context.SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync(cancellationToken);
 
@@ -77,7 +74,6 @@ namespace ApplicationCore.Handlers
             {
                 await transaction.RollbackAsync(cancellationToken);
 
-                // Log detallado de la excepción
                 var errorMessage = new StringBuilder();
                 errorMessage.AppendLine($"Error: {ex.Message}");
 

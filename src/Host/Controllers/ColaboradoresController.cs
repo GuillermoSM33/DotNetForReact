@@ -28,6 +28,39 @@ namespace Host.Controllers
             return Ok(result);
         }
 
+        [HttpGet("getColaboradoresByDate")]
+        public async Task<IActionResult> GetColaboradorByRangeOfDate(DateTime FechaCreacion, DateTime FechaFinal)
+        {
+            var result = await _service.GetColaboradorByRangeOfDate(FechaCreacion, FechaFinal);
+            if (result == null)
+            {
+                return NotFound(new Response<string>("Colaborador no encontrado"));
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("getColaboradoresByValue")]
+        public async Task<IActionResult> GetColaboradorByValue(int isProfessor)
+        {
+            var result = await _service.GetColaboradorByValue(isProfessor);
+            if (result == null)
+            {
+                return NotFound(new Response<string>("Colaborador no encontrado"));
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("getColaboradoresFiltered")]
+        public async Task<IActionResult> GetColaboradorFiltered(DateTime FechaCreacion, DateTime FechaFinal, int isProfessor)
+        {
+            var result = await _service.GetColaboradorFiltered(FechaCreacion, FechaFinal, isProfessor);
+            if (result == null)
+            {
+                return NotFound(new Response<string>("Colaborador no encontrado"));
+            }
+            return Ok(result);
+        }
+
         [HttpPost("create")]
         public async Task<ActionResult<Response<int>>> CreateColaboradores(ColaboradoresCreateCommand command)
         {

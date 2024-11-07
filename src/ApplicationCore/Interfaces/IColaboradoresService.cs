@@ -12,6 +12,10 @@ namespace ApplicationCore.Interfaces
 
     {
             Task<Response<object>> GetColaboradores();
-        
+
+            Task<Response<List<Colaboradores>>> GetColaboradorByRangeOfDate(DateTime FechaCreacion, DateTime FechaFinal);
+            Task<Response<List<Colaboradores>>> GetColaboradorByValue(int IsProfessor);
+            Task<Response<List<Colaboradores>>> GetColaboradorFiltered(DateTime FechaCreacion, DateTime FechaFinal, int IsProfessor);
+
     }
 }

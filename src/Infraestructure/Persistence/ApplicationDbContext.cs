@@ -25,6 +25,13 @@ namespace Infraestructure.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Colaboradores>()
+                .Property(e => e.IsProfessor)
+                .HasConversion(
+                    v => v == 1,  
+                    v => v ? 1 : 0 
+                );
+
             modelBuilder.Entity<Profesor>()
                 .HasOne(p => p.Colaborador)
                 .WithMany() 
@@ -33,7 +40,7 @@ namespace Infraestructure.Persistence
 
             modelBuilder.Entity<Administrativo>()
                 .HasOne(a => a.Colaborador)
-                .WithMany() 
+                .WithMany()  
                 .HasForeignKey(a => a.FKColaborador)
                 .OnDelete(DeleteBehavior.Cascade);
         }
