@@ -40,10 +40,10 @@ namespace Infraestructure.Services
             return new Response<List<Colaboradores>>(colaboradores);
         }
 
-        public async Task<Response<List<Colaboradores>>> GetColaboradorFiltered(DateTime FechaCreacion, DateTime FechaFinal, int IsProfessor)
+        public async Task<Response<List<Colaboradores>>> GetColaboradorFiltered(DateTime FechaCreacion, DateTime FechaFinal, int IsProfessor, int Edad)
         {
             var colaboradores = await _context.Colaboradores
-                .Where(c => c.FechaCreacion >= FechaCreacion && c.FechaCreacion <= FechaFinal && c.IsProfessor == IsProfessor)
+                .Where(c => c.FechaCreacion >= FechaCreacion && c.FechaCreacion <= FechaFinal && c.IsProfessor == IsProfessor && c.Edad == Edad)
                 .ToListAsync();
             return new Response<List<Colaboradores>>(colaboradores);
         }

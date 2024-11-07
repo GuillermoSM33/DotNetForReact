@@ -51,9 +51,9 @@ namespace Host.Controllers
         }
 
         [HttpGet("getColaboradoresFiltered")]
-        public async Task<IActionResult> GetColaboradorFiltered(DateTime FechaCreacion, DateTime FechaFinal, int isProfessor)
+        public async Task<IActionResult> GetColaboradorFiltered(DateTime FechaCreacion, DateTime FechaFinal, int isProfessor, int Edad)
         {
-            var result = await _service.GetColaboradorFiltered(FechaCreacion, FechaFinal, isProfessor);
+            var result = await _service.GetColaboradorFiltered(FechaCreacion, FechaFinal, isProfessor, Edad);
             if (result == null)
             {
                 return NotFound(new Response<string>("Colaborador no encontrado"));
